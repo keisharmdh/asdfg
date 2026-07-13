@@ -18,7 +18,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '24'
+        node-version: '22'
 
     # Perbaikan 3: Menggunakan 'npm install' biasa & mengizinkan jalan terus walau package.json belum ada
     - name: Install dependencies
