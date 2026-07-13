@@ -1,0 +1,45 @@
+name: project magang
+
+# Pipeline ini berjalan setiap ada push atau pull request ke branch main
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Mengambil kode terbaru dari repository
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # 2. Setup environment (Contoh jika menggunakan NodeJS, sesuaikan dengan bahasa timmu)
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-node-version: '20'
+        cache: 'npm'
+
+    # 3. Install dependensi aplikasi
+    - name: Install dependencies
+      run: npm ci
+
+    # 4. Menjalankan Unit Testing (Sangat krusial untuk menguji logic Fitur 3 milikmu)
+    - name: Run tests
+      run: npm test
+
+  security-scan:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # 5. Fitur 4 DevSecOps: Menjalankan pemindaian celah keamanan (SAST) otomatis
+    - name: Run Semgrep Security Scan
+      run: |
+        pip install semgrep
+        semgrep scan --config=auto
