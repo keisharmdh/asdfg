@@ -16,7 +16,7 @@ jobs:
 
     # Perbaikan 1 & 2: Memperbaiki typo input dan menaikkan versi ke Node 24 sesuai standar 2026
     - name: Set up Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v5
       with:
         node-version: '22'
 
